@@ -40,9 +40,8 @@ class Container {
     }
 };
 
-class Placeable extends A{
+class Placeable{
     constructor(x, y){
-        super();
         this._x = x;
         this._y = y;
     }
@@ -56,7 +55,7 @@ class Placeable extends A{
     }
 };
 
-class Window extends mix.mix(Container, Placeable){
+class Window extends mix(Container, Placeable){
    constructor(width, height, x, y){
        super(width, height, x, y);
    }

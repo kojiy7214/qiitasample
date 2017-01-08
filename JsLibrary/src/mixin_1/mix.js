@@ -28,7 +28,8 @@
  * @param {type} mixins mixin対象クラス
  * @returns {nm$_mix.exports.mix} baseとmixinsの機能を併せ持つ匿名クラスを返却
  */
-exports.mix = function (base, ...mixins) {
+
+module.exports = function(base, ...mixins) {
     /**
      * コピー先にコピー元のプロパティをコピーする。
      * ただしコンストラクタ、プロトタイプはコピーしない。
@@ -60,7 +61,7 @@ exports.mix = function (base, ...mixins) {
 
                 let mixinobj = new mixins[i](...args);
                 copyProperties(this, mixinobj);
-                args = args.splice(mixin[i].length);
+                args = args.splice(mixins[i].length);
             }
         }
     }
