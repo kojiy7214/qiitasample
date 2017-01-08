@@ -4,5 +4,7 @@
     "keywords": ["util", "functional", "server", "client", "browser"],
     "author": "kojiy",
     "contributors": [],
-    "dependencies": {}
+    "dependencies": {}, "scripts":{
+"start":"node src\/mixin_1\/sample.js"}
+
 }
