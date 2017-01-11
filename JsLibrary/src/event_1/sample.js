@@ -1,7 +1,7 @@
 /*
  * The MIT License
  *
- * Copyright 2017 kojiy
+ * Copyright 2017 kojiy.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -23,47 +23,31 @@
  */
 
 
-const mix =require('./mix.js');
+let EventAware =require('./eventaware.js');
 
-class Container {
-    constructor(width, height){
-        this._width = width;
-        this._height = height;
+class CabinAtendant extends EventAware{
+    findDoctor(){
+        console.log(this.constructor.name + ": お客様の中にお医者様はいらっしゃいませんか！？");
+        this.dispatch("doctorPlease");
     }
+}
 
-    get width(){
-        return this._width;
+class BlackJack extends EventAware{
+    onDoctorPlease(){
+        console.log(this.constructor.name + ": 私は医者だ。無免許医だがね。");
+        this.dispatch("hasNoLicense");
     }
+}
 
-    get height(){
-        return this._height;
+class AnotherDoctor extends EventAware{
+    onHasNoLicense(){
+        console.log(this.constructor.name + ": 無免許医などに任せられるか！私に任せてもらおう。");
     }
-};
+}
 
-class Placeable{
-    constructor(x, y){
-        this._x = x;
-        this._y = y;
-    }
+var ca = new CabinAtendant();
+var bj = new BlackJack();
+var doc = new AnotherDoctor();
 
-    get x(){
-        return this._x;
-    }
+ca.findDoctor();
 
-    get y(){
-        return this._y;
-    }
-};
-
-class Window extends mix(Container, Placeable){
-   constructor(width, height, x, y){
-       super(width, height, x, y);
-   }
-};
-
-let w = new Window(640, 320, 10, 100);
-
-console.log('width = ' + w.width);
-console.log('height = ' + w.height);
-console.log('x = ' + w.x);
-console.log('y = ' + w.y);

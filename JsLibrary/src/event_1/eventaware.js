@@ -1,7 +1,7 @@
 /*
  * The MIT License
  *
- * Copyright 2017 kojiy
+ * Copyright 2017 kojiy.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -22,48 +22,13 @@
  * THE SOFTWARE.
  */
 
-
-const mix =require('./mix.js');
-
-class Container {
-    constructor(width, height){
-        this._width = width;
-        this._height = height;
+module.exports = class EventAware{
+    constructor(){
+        (EventAware.objectArray = EventAware.objectArray || []).push(this);
     }
 
-    get width(){
-        return this._width;
+    dispatch(event, ...args){
+        let funcname = "on" + event[0].toUpperCase() + event.slice(1);
+        EventAware.objectArray.forEach(o => o !== this && o[funcname] && o[funcname](...args));
     }
-
-    get height(){
-        return this._height;
-    }
-};
-
-class Placeable{
-    constructor(x, y){
-        this._x = x;
-        this._y = y;
-    }
-
-    get x(){
-        return this._x;
-    }
-
-    get y(){
-        return this._y;
-    }
-};
-
-class Window extends mix(Container, Placeable){
-   constructor(width, height, x, y){
-       super(width, height, x, y);
-   }
-};
-
-let w = new Window(640, 320, 10, 100);
-
-console.log('width = ' + w.width);
-console.log('height = ' + w.height);
-console.log('x = ' + w.x);
-console.log('y = ' + w.y);
+}
