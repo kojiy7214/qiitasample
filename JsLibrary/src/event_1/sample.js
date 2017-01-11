@@ -25,7 +25,7 @@
 
 let EventAware =require('./eventaware.js');
 
-class CabinAtendant extends EventAware{
+class CabinAttendant extends EventAware{
     findDoctor(){
         console.log(this.constructor.name + ": お客様の中にお医者様はいらっしゃいませんか！？");
         this.dispatch("doctorPlease");
@@ -45,7 +45,7 @@ class AnotherDoctor extends EventAware{
     }
 }
 
-var ca = new CabinAtendant();
+var ca = new CabinAttendant();
 var bj = new BlackJack();
 var doc = new AnotherDoctor();
 
