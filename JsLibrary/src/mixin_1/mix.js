@@ -63,6 +63,10 @@ module.exports = function(base, ...mixins) {
                 copyProperties(this, mixinobj);
                 args = args.splice(mixins[i].length);
             }
+
+            //Mixinクラスに対するinstanceof代替メソッド
+            this.isMixedWith = (cl) =>  mixins.reduce(
+                (p,c) => p || (cl === c || cl.isPrototypeOf(c)), false);
         }
     }
 
